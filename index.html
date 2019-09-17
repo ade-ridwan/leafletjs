@@ -5,19 +5,65 @@
 <title>Membuat Marker Dengan Leaflet JS</title>
 
 <link rel="stylesheet" type="text/css" href="assets/leaflet.css">
-<link rel="stylesheet" type="text/css" href="assets/leaflet.js">
+<script type="text/javascript" src="assets/leaflet.js"></script>
 <style type="text/css">
 	#map{
-		width: 600px;
+		width: 800px;
 		height: 400px;
 	}
 </style>
 </head>
 
 <body>
-
+<h3>Membuat Marker Map dengan Leaflet JS</h3>
 <div id="map"></div>
 
+<script type="text/javascript">
+    
+
+    // koordinat dan zoom view peta
+    var cities = L.layerGroup();
+
+    // ini adalah copyright;
+    var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+ 
+    var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr}),
+      streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+ 	
+ 	// posisi default peta saat diload
+    var map = L.map('map', {
+      center: [-6.97583, 108.48306],
+      zoom: 15,
+      layers: [streets, cities]
+    });
+ 
+    var baseLayers = {
+      "Grayscale": grayscale,
+      "Streets": streets
+    };
+ 
+    var overlays = {
+      "Cities": cities
+    };
+ 
+    L.control.layers(baseLayers, overlays).addTo(map);
+    
+    //looping script berikut dengan PHP jika mau menampilkan data dari database
+    var foto = 'http://s.kaskus.id/images/2016/02/12/8496093_20160212102444.jpg';
+    L.marker([-6.97583, 108.48306]).addTo(map)
+               .bindPopup("<a href=# style=color:black><b>Kuningan</b></a> <br /> <img src="+foto+" width=100px; height=100px;>");
+
+    L.marker([-6.97583, 108.49306]).addTo(map)
+               .bindPopup("<a href=# style=color:black><b>Kuningan</b></a> <br /> <img src="+foto+" width=100px; height=100px;>");
+
+    L.marker([-6.97883, 108.48306]).addTo(map)
+               .bindPopup("<a href=# style=color:black><b>Kuningan</b></a> <br /> <img src="+foto+" width=100px; height=100px;>");
+               
+</script>
+<h5>Created By Ade Ridwan</h5>
 </body>
 
 </html>
